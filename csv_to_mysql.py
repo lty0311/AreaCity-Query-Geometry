@@ -7,6 +7,20 @@ import logging
 
 # 必须是mysql5.7 my.ini增加max_allowed_packet=64M
 # mysql查询方式：SELECT id,deep,name,ext_path FROM geo WHERE ST_Intersects(polygon, ST_GeomFromText('POINT(123.42805 41.834777)',4326))=1
+"""
+CREATE TABLE `geo` (
+  `id` int(11) NOT NULL,
+  `pid` int(11) NOT NULL,
+  `deep` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `ext_path` varchar(255) NOT NULL,
+  `geo` geometry NOT NULL,
+  `polygon` geometry NOT NULL,
+  PRIMARY KEY (`id`),
+  SPATIAL KEY `geo` (`geo`),
+  SPATIAL KEY `polygon` (`polygon`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+"""
 
 # 配置日志记录
 logging.basicConfig(
